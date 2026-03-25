@@ -56,14 +56,17 @@ public class Employe {
         int nbWeekends = 104; // anciennement "var"
         switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){
             case THURSDAY: 
-                if(d.isLeapYear()) nbWeekends = nbWeekends + 1; 
+                if(d.isLeapYear()) nbWeekends++;
                 break;
             case FRIDAY: 
-                if(d.isLeapYear()) nbWeekends = nbWeekends + 2; 
-                else nbWeekends = nbWeekends + 1; 
+                if(d.isLeapYear()) nbWeekends += 2;
+                else nbWeekends++;
                 break;
             case SATURDAY: 
-                nbWeekends = nbWeekends + 1; 
+                nbWeekends++;
+                break;
+            default:
+                // Pour les autres jours (MONDAY, TUESDAY, WEDNESDAY, SUNDAY), rien à faire
                 break;
         }
         int nbJoursFeries = (int) Entreprise.joursFeries(d).stream()
