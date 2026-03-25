@@ -55,6 +55,12 @@ public class Employe {
         int nbJoursAnnee = d.isLeapYear() ? 366 : 365;
         int nbWeekends = 104; // anciennement "var"
         switch (LocalDate.of(d.getYear(),1,1).getDayOfWeek()){
+            case MONDAY:
+            case TUESDAY:
+            case WEDNESDAY:
+            case SUNDAY:
+                // pas d’ajustement
+                break;
             case THURSDAY: 
                 if(d.isLeapYear()) nbWeekends++;
                 break;
@@ -64,9 +70,6 @@ public class Employe {
                 break;
             case SATURDAY: 
                 nbWeekends++;
-                break;
-            default:
-                // Pour les autres jours (MONDAY, TUESDAY, WEDNESDAY, SUNDAY), rien à faire
                 break;
         }
         int nbJoursFeries = (int) Entreprise.joursFeries(d).stream()
